@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools >= 46.4.0", "wheel >= 0.34.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pydantic_cloud_secret"
+dynamic = ["version"]
+description = "Putting cloud secrets into pydantic models"
+authors = [
+    {name = "Tom McLean", email = "mcleantom97@gmail.com"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+dependencies = [
+    "pydantic",
+    "boto3",
+    "botocore",
+]
+requires-python = ">=3.8"
+
+[metadata]
+version = {attr = "pydantic_cloud_secret.__version__"}
+
+[tool.black]
+line-length = 120
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+    | \.git
+    | \.hg
+    | \.mypy_cache
+    | \.nox
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+)/
+'''
+
+[tool.ruff]
+line-length = 120
+ignore = ["F405", "B008"]
+select = ["E", "F", "B", "C4", "DTZ", "PTH", "I001"]
+# unfixable = ["C4", "B"]
+exclude = []
+
+[tool.ruff.per-file-ignores]
+"**/__init__.py" = ["F401", "F403"]
+
+[tool.ruff.isort]
+split-on-trailing-comma = true
+known-third-party = ["matplotlib", "pydantic"]
+no-lines-before = ["local-folder"]
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "this",
+    "local-folder"
+]
+
+[tool.ruff.isort.sections]
+"this" = ["light_room"]
